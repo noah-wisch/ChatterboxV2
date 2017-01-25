@@ -1,19 +1,22 @@
 
-/**
- * Use a collection when your primary data is an array
- */
 const ChatModel = require('./chat');
 
 module.exports = Backbone.Collection.extend({
-    // type of model stored in this collection
-    // every collection contains some type of model...
+
     model: ChatModel,
 
-    createNew(newMessage) {
+    createNew(message, from) {
         console.log('creating new model')
+
         const newChat = new ChatModel();
-        newChat.set('name', newMessage);
+        newChat.save('from', from);
+        newChat.save('message', message);
         this.add(newChat);
+        newChat.save();
+        console.log(newChat);
     },
+    // newChat: {
+    //     const newChat = new
+    // },
 });
 

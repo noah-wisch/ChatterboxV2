@@ -8,12 +8,14 @@ module.exports = Backbone.View.extend({
         'click #sent': 'updateEvent',
     },
     updateEvent() {
-        const newSend = this.el.querySelector('.outMessages').value;
-        this.model.createNew(newSend);
+        const message = this.el.querySelector('#write').value;
+        const from = this.el.querySelector('#name').value;
+        this.model.createNew(from, message);
+ 
     },
     render() {
         const template = document.querySelector('#chat-template').innerHTML;
-        this.el.querySelector('#list-events').innerHTML = '';
+        this.el.querySelector('.messages').innerHTML = '';
         for (let i = 0; i < this.model.models.length; i++) {
             const m = this.model.models[i];
 
@@ -28,13 +30,13 @@ module.exports = Backbone.View.extend({
                 }
             );
 
-           const button = li.querySelector('.remove');
-           button.addEventListener('click', () => {
-               console.log('clicked on ' + m.get('name'));
-               this.model.remove(m);
-           });
+        //    const button = li.querySelector('.remove');
+        //    button.addEventListener('click', () => {
+        //        console.log('clicked on ' + m.get('name'));
+        //        this.model.remove(m);
+        //    });
 
-            const parent = this.el.querySelector('#list-events');
+            const parent = this.el.querySelector('.messages');
             parent.appendChild(li);
         }
     },
